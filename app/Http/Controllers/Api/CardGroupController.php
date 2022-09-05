@@ -4,99 +4,56 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CardGroup;
-use Exception;
-use Illuminate\Http\Request;
+use App\Services\ApiService;
 
 class CardGroupController extends Controller
 {
+    private $apiService;
+
+    public function __construct()
+    {
+        $this->apiService = new ApiService(CardGroup::class);
+    }
+
     public function index()
     {
-        try {
-            $cardGroups = CardGroup::orderBy('created_at', 'ASC')
-            ->get();
-
-            return response()->json([
-                'Status' => 'Success',
-                'cardGroups' => $cardGroups
-            ], 200);
-        } catch (\Throwable $th) {
-            logger()->error($th);
-
-            return response()->json([
-                'Status' => 'Error'
-            ], 400);
-        }
+        return $this->apiService->index();
     }
 
     public function store()
     {
-        try {
-            request()->validate([
-                'name' => 'required',
-            ]);
+        request()->validate([
+            'name' => 'required',
+        ]);
 
-            $data = request()->only([
-                'name',
-            ]);
+        $data = request()->only([
+            'name',
+        ]);
 
-            $cardGroup = CardGroup::create($data);
-
-            return response()->json([
-                'Status' => 'Success',
-                'CardGroup' => $cardGroup
-            ], 200);
-        } catch (\Throwable $th) {
-            logger()->error($th);
-
-            return response()->json([
-                'Status' => 'Error'
-            ], 400);
-        }
+        return $this->apiService->store($data);
     }
 
     public function destroy($id)
     {
-        try {
-            $cardGroup = CardGroup::where('id', $id)->first();
-
-            if (!$cardGroup) {
-                throw new Exception('Card group does not exists.');
-            };
-
-            $cardGroup->delete();
-
-            return response()->json([
-                'Status' => 'Success',
-            ], 200);
-        } catch (\Throwable $th) {
-            logger()->error($th);
-
-            return response()->json([
-                'Status' => 'Error'
-            ], 400);
-        }
+        return $this->apiService->destroy($id);
     }
 
-    public function find($id)
+    public function show($id)
     {
-        try {
-            $cardGroup = CardGroup::where('id', $id)->first();
+        return $this->apiService->show($id);
+    }
 
-            if (!$cardGroup) {
-                throw new Exception('Card group does not exists.');
-            };
+    public function update()
+    {
+        request()->validate([
+            'id' => 'required',
+            'name' => 'required',
+        ]);
 
-            $cardGroup->delete();
+        $data = request()->only([
+            'name',
+        ]);
 
-            return response()->json([
-                'Status' => 'Success',
-            ], 200);
-        } catch (\Throwable $th) {
-            logger()->error($th);
-
-            return response()->json([
-                'Status' => 'Error'
-            ], 400);
-        }
+        return $this->apiService->update($data);
     }
 }
