@@ -38,9 +38,9 @@ class {{class}}Controller extends Controller
         return $this->apiService->destroy($id);
     }
 
-    public function find($id)
+    public function show($id)
     {
-        return $this->apiService->find($id);
+        return $this->apiService->show($id);
     }
 
     public function update()
