@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\CardGroupController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TeamController;
@@ -24,6 +25,7 @@ Route::apiResources([
     'card-group' => CardGroupController::class,
     'team' => TeamController::class,
     'project' => ProjectController::class,
+    'card' => CardController::class
 ]);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
