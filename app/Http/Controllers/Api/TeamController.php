@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Team;
 use App\Services\ApiService;
 
 class TeamController extends Controller
