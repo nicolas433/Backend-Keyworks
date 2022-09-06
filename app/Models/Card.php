@@ -9,22 +9,16 @@ class Card extends Model
 {
     use HasFactory;
 
-    public const STATUS = [
-        'WARNING' => 'ATENÇÃO',
-        'DELAYED' => 'ATRASADO',
-        'ALRIGHT' => 'EM DIA',
-    ];
-
     protected $fillable = [
         'title',
-        'jurisdiction',
-        'project',
         'dead_line',
         'description',
         'balance',
-        'prevision',
         'status',
-        'team',
+        'prevision',
+        'card_group_id',
+        'project_id',
+        'team_id',
     ];
 
     public function cardGroup()
