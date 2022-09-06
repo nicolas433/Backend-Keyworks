@@ -22,7 +22,7 @@ class MakeCustomController extends GeneratorCommand
 
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Controllers\Api';
+        return $rootNamespace . '\Http\Controllers\Api';
     }
 
     public function getStub()
