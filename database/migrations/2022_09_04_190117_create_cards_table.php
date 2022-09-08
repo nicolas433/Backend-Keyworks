@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('title');
             $table->dateTime('dead_line');
             $table->string('description');
-            $table->time('balance');
+            $table->string('balance');
             $table->string('status');
-            $table->time('prevision');
+            $table->string('prevision');
 
             $table->unsignedBigInteger('card_group_id')->unsigned();
             $table->foreign('card_group_id')->references('id')->on('card_groups');
