@@ -15,13 +15,7 @@ class ApiService
 
     public function index()
     {
-        $list = $this->model::orderBy('created_at', 'ASC')
-            ->get();
-
-        return response()->json([
-            'status' => 'success',
-            'list' => $list
-        ], 200);
+        return $this->model::query()->orderBy('created_at', 'ASC')->get();
     }
 
     public function store($data)
@@ -31,7 +25,7 @@ class ApiService
         return response()->json([
             'status' => 'success',
             'data' => $data
-        ], 200);
+        ], 201);
     }
 
     public function destroy($id)

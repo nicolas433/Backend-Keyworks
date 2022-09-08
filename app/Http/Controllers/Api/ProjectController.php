@@ -17,12 +17,16 @@ class ProjectController extends Controller
 
     public function index()
     {
-        return $this->apiService->index();
+        $data = $this->apiService->index();
+
+        return response()->json([
+            'status' => 'success',
+            'list' => $data,
+        ], 200);
     }
 
     public function store()
     {
-
         request()->validate([
             'name' => 'required',
         ]);

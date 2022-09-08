@@ -17,7 +17,13 @@ class CardController extends Controller
 
     public function index()
     {
-        return $this->apiService->index();
+        $data = $this->apiService->index();
+        $data->load(['team', 'project', 'cardGroup']);
+
+        return response()->json([
+            'status' => 'success',
+            'list' => $data
+        ], 200);
     }
 
     public function store()
