@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\CardGroup;
+use App\Models\Project;
+use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,15 +25,11 @@ return new class extends Migration
             $table->string('balance');
             $table->string('status');
             $table->string('prevision');
+            $table->unsignedInteger('order')->default(0);
 
-            $table->unsignedBigInteger('card_group_id')->unsigned();
-            $table->foreign('card_group_id')->references('id')->on('card_groups');
-
-            $table->unsignedBigInteger('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('projects');
-
-            $table->unsignedBigInteger('team_id')->unsigned();
-            $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreignIdFor(CardGroup::class);
+            $table->foreignIdFor(Project::class);
+            $table->foreignIdFor(Team::class);
 
             $table->timestamps();
         });
