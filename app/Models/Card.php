@@ -33,6 +33,6 @@ class Card extends Model
 
     public function team()
     {
-        return $this->belongsTo(CardGroup::class);
+        return $this->belongsTo(Team::class);
     }
 }
