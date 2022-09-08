@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\CardGroupController;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,12 +23,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
-Route::apiResources([
-    'card-group' => CardGroupController::class,
-    'team' => TeamController::class,
-    'project' => ProjectController::class,
-    'card' => CardController::class
-]);
+Route::post('register', [RegisterController::class, 'store']);
+Route::post('login', [AuthController::class, 'auth']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::apiResources([
+        'card-groups' => CardGroupController::class,
+        'teams' => TeamController::class,
+        'projects' => ProjectController::class,
+        'cards' => CardController::class
+    ]);
 });
