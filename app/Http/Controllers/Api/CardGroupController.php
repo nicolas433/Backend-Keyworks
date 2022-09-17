@@ -18,6 +18,7 @@ class CardGroupController extends Controller
     public function index()
     {
         $data = $this->apiService->index();
+        $data->load(['cards', 'cards.team.users', 'cards.project',]);
 
         return response()->json([
             'status' => 'success',
@@ -52,7 +53,6 @@ class CardGroupController extends Controller
     {
         request()->validate([
             'id' => 'required',
-            'name' => 'required',
         ]);
 
         $data = request()->only([

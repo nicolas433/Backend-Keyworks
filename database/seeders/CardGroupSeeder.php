@@ -30,9 +30,5 @@ class CardGroupSeeder extends Seeder
         CardGroup::create([
             'name' => 'Finalizado'
         ]);
-
-        CardGroup::create([
-            'name' => 'Outros'
-        ]);
     }
 }

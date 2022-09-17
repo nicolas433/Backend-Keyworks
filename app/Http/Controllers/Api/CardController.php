@@ -28,7 +28,6 @@ class CardController extends Controller
 
     public function store()
     {
-
         request()->validate([
             'title' => 'required',
             'dead_line' => 'required',
@@ -92,6 +91,21 @@ class CardController extends Controller
             'card_group_id',
             'project_id',
             'team_id',
+        ]);
+
+        return $this->apiService->update($data);
+    }
+
+    public function updateCardGroup()
+    {
+        request()->validate([
+            'id' => 'required',
+            'card_group_id' => 'required',
+        ]);
+
+        $data = request()->only([
+            'id',
+            'card_group_id',
         ]);
 
         return $this->apiService->update($data);

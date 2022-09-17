@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
-            $table->dateTime('dead_line');
+            $table->date('dead_line');
             $table->string('description');
             $table->string('balance');
             $table->string('status');

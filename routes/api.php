@@ -26,11 +26,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterController::class, 'store']);
 Route::post('login', [AuthController::class, 'auth']);
 
+Route::apiResources([
+    'card-groups' => CardGroupController::class,
+    'teams' => TeamController::class,
+    'projects' => ProjectController::class,
+    'cards' => CardController::class,
+]);
+
+Route::post('cards/card-group', [CardController::class, 'updateCardGroup']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::apiResources([
-        'card-groups' => CardGroupController::class,
-        'teams' => TeamController::class,
-        'projects' => ProjectController::class,
-        'cards' => CardController::class
-    ]);
 });

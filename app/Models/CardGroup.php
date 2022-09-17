@@ -12,4 +12,9 @@ class CardGroup extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }

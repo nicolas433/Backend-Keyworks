@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(10)->create()->each(function (User $user) {
+        User::factory()->count(4)->create()->each(function (User $user) {
             $user->teams()->attach(rand(1, 3));
         });
     }

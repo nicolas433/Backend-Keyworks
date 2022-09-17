@@ -16,15 +16,24 @@ class CardFactory extends Factory
      */
     public function definition()
     {
+        $status = $this->faker->randomElement(['EM DIA', 'ATENÇÃO', 'EM ATRASO']);
+        $balance = '00' . ':' . random_int(10, 60);
+
+        if ($status == 'EM ATRASO') {
+            $balance = '- ' . $balance;
+        } else {
+            $balance = '+ ' . $balance;
+        }
+
         return [
             'title' => fake()->name(),
             'dead_line' => now()->addDay(7)->toDateString(),
             'description' => fake()->text(),
             'prevision' => '0' . fake()->randomNumber(1) . ':' . random_int(10, 60),
-            'status' => $this->faker->randomElement(['EM DIA', 'ATENÇÃO', 'EM DIA']),
-            'balance' => '00' . ':' . random_int(10, 60),
+            'status' => $status,
+            'balance' => $balance,
             'card_group_id' => random_int(1, 5),
-            'project_id' => random_int(1, 3),
+            'project_id' => random_int(1, 2),
             'team_id' => random_int(1, 3),
         ];
     }
